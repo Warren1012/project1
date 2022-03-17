@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h1 class="header">Properties</h1>
+{% if properties %}
+<div class="container">
+<div class="row">
+        {% for propT in properties %}
+            <div class="col-sm-4 card-space">
+                <div class="card">
+                    <img class="card-img-top" src="{{ url_for('static', filename='uploads/' + propT.photo) }}" alt="Card image" style="width:100%; height:150px;">  
+                  <div class="card-body">
+                     <h4 class="card-title">{{ propT.descript}}
+ <p class="card-text"><span class="">{{ propT.location }}</span></p>
+ <p class="card-text"><span class="">{{ propT.price }}</span></p>
+</div>
+                   <a href=""><input type="button" class="btn" value="View Properties"/></a>
+
+</div>
+            </div>
+        {% endfor %}
+
+
+        
+    {% endif %}
+
+
+</div>
+{% endblock %

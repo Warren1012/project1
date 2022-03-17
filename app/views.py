@@ -5,9 +5,10 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file creates your application.
 """
 
-from app import app
+from app import app,db
 from flask import flash, render_template, request, redirect, url_for
 from app.forms import Property
+from app.model import Property
 from werkzeug.utils import secure_filename
 import os
 
@@ -28,7 +29,7 @@ def about():
 
 @app.route('/properties/create')
 def addproperty():
-   
+    
     id=0
     if request.method == 'POST':
         if form.validate_on_submit(): 
@@ -37,8 +38,22 @@ def addproperty():
             filename=secure_filename(photo.filename)
             photo.save(os.path.join(app.confi['UPLOAD_FOLDER'], filename))
             id+=1
+
+            title = form.title.data
+            rooms= form.rooms.data
+            bathroom = form.bathroom.data
+            location = form.location.data
+            price = form.price.data
+            type= form.type.data
+            description = form.description.data
+            
+            newProperty = Property(title=title,rooms=rooms,bathroom=bathroom,location=location,price=price,type=type,description=description,image=filename)
+            db.session.add(newProperty)
+            db.session.commit()
+
+            properties =Property.query.all()
             flash('Success')    
-            return redirect(url_for('/properties'))
+            return redirect(url_for('/properties',properties=properties))
         else:
             flash('Error.Try again','Failed')
     return render_template('form.html',form=form)
@@ -46,6 +61,9 @@ def addproperty():
 
 
 @app.route('/properties')
+def properties():
+    properties = Property.query.all()
+    return render_template('properties.html', properties = properties)
 
 
 @app.route('/properties/<propertyid>')
