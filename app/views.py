@@ -58,17 +58,24 @@ def addproperty():
             flash('Error.Try again','Failed')
     return render_template('form.html',form=form)
 
-
-
 @app.route('/properties')
 def properties():
     properties = Property.query.all()
     return render_template('properties.html', properties = properties)
 
 
-@app.route('/properties/<propertyid>')
+@app.route('/property/<propertyid>')
+def propertyid(propertyid):
+    propertyid = Property.query.get(propertyid)
+    return render_template('propertyid.html', propertyid = propertyid)
 
-
+def get_uploaded_images():
+    rootdir = os.getcwd()
+    list = []
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads/'):
+        for file in files:
+            list.append(file)
+        return list
 ###
 # The functions below should be applicable to all Flask apps.
 ###
