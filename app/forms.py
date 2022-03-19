@@ -1,4 +1,3 @@
-from secrets import choice
 from flask_wtf import FlaskForm
 from wtforms import StringField,FileField,DecimalField,IntegerField,SelectField,TextAreaField
 from wtforms.validators import DataRequired

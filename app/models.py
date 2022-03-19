@@ -1,3 +1,4 @@
+import unicodedata
 from . import db
 
 class Property(db.Model):
@@ -38,7 +39,7 @@ class Property(db.Model):
 
     def get_id(self):
         try:
-            return unicode(self.id)  # python 2 support
+            return unicodedata(self.id)  # python 2 support
         except NameError:
             return str(self.id)  # python 3 support
 

@@ -8,7 +8,7 @@ This file creates your application.
 from app import app,db
 from flask import flash, render_template, request, redirect, url_for
 from app.forms import Property
-from app.model import Property
+from app.models import Property
 from werkzeug.utils import secure_filename
 import os
 
