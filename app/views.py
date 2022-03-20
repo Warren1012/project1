@@ -27,7 +27,7 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
-@app.route('/property/')
+@app.route('/property',methods=['POST', 'GET'])
 def addproperty():
     
     id=0
@@ -58,7 +58,7 @@ def addproperty():
             flash('Error.Try again','Failed')
     return render_template('form.html',form=form)
 
-@app.route('/properties')
+@app.route('/properties',methods=['POST', 'GET'])
 def properties():
     properties = Property.query.all()
     return render_template('properties.html', properties = properties)
