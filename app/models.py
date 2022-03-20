@@ -18,7 +18,7 @@ class Property(db.Model):
     propertyT=db.Column(db.String(80))
     photo=db.Column(db.String(length=2048))
     
-    def __init__(self, title,rooms, bathroom,location,price,type,description,image):
+    def __init__(self,title,rooms, bathroom,location,price,type,description,image):
         self.title = title
         self.rooms = rooms
         self.bathroom = bathroom
