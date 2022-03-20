@@ -7,7 +7,7 @@ class Config(object):
     """Base Config Object"""
     DEBUG = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'Som3$ec5etK*y')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('postgres://viqdsdoagsfjyc:d7393647f55edfff6af12b483da80110424af3b9e5578a37afa40641fbd83f1b@ec2-23-20-73-25.compute-1.amazonaws.com:5432/daibko6nt55df0') or 'postgresql://project:nigga102@localhost/project1'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('postgres://bospacvdnhmblk:c464c9708b3eaebfdeb6cddf114c0938a1e8af06e14c00a75e63b98abbcf1d85@ec2-34-224-226-38.compute-1.amazonaws.com:5432/dbst7r3ekuid7m') or 'postgresql://project:nigga102@localhost/project1'
     SQLALCHEMY_TRACK_MODIFICATIONS = False # This is just here to suppress a warning from SQLAlchemy as it will soon be removed
     UPLOAD_FOLDER=".uploads/"
 
