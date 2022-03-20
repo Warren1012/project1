@@ -29,10 +29,9 @@ def about():
 
 @app.route('/property',methods=['POST', 'GET'])
 def addproperty():
-    form = Property()
-
+    
     if form.validate_on_submit(): 
-            
+        form = Property()    
         photo=form.image.data
         filename=secure_filename(photo.filename)
         photo.save(os.path.join(app.confi['UPLOAD_FOLDER'], filename))
