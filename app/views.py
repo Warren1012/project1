@@ -27,7 +27,7 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
-@app.route('/property')
+@app.route('/property/')
 def addproperty():
     
     id=0
