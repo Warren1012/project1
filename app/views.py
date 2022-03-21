@@ -30,7 +30,7 @@ def about():
 @app.route('/property',methods=['POST', 'GET'])
 def addproperty():
     if request.method == 'POST':
-        form = Property()
+        form = property()
         if form.validate_on_submit(): 
             
             photo=form.image.data
@@ -46,11 +46,11 @@ def addproperty():
             type= form.type.data
             description = form.description.data
             
-            newProperty = Property(title=title,rooms=rooms,bathroom=bathroom,location=location,price=price,type=type,description=description,image=filename)
+            newProperty = property(title=title,rooms=rooms,bathroom=bathroom,location=location,price=price,type=type,description=description,image=filename)
             db.session.add(newProperty)
             db.session.commit()
 
-            properties =Property.query.all()
+            properties =property.query.all()
             flash('Success')    
             return redirect(url_for('/properties',properties=properties))
         else:
@@ -59,13 +59,13 @@ def addproperty():
 
 @app.route('/properties',methods=['POST', 'GET'])
 def properties():
-    properties = Property.query.all()
+    properties = property.query.all()
     return render_template('properties.html', properties = properties)
 
 
 @app.route('/property/<propertyid>')
 def propertyid(propertyid):
-    propertyid = Property.query.get(propertyid)
+    propertyid = property.query.get(propertyid)
     return render_template('propertyid.html', propertyid = propertyid)
 
 def get_uploaded_images():
