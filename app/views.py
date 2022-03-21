@@ -7,7 +7,7 @@ This file creates your application.
 
 from app import app,db
 from flask import flash, render_template, request, redirect, url_for
-from app.forms import Property
+from app.forms import Propertyform
 from app.models import Property
 from werkzeug.utils import secure_filename
 import os
@@ -30,7 +30,7 @@ def about():
 @app.route('/property',methods=['POST', 'GET'])
 def addproperty():
     if request.method == 'POST':
-        form = property()
+        form = Propertyform()
         if form.validate_on_submit(): 
             
             photo=form.image.data
@@ -46,11 +46,11 @@ def addproperty():
             type= form.type.data
             description = form.description.data
             
-            newProperty = property(title=title,rooms=rooms,bathroom=bathroom,location=location,price=price,type=type,description=description,image=filename)
+            newProperty = Property(title=title,rooms=rooms,bathroom=bathroom,location=location,price=price,type=type,description=description,image=filename)
             db.session.add(newProperty)
             db.session.commit()
 
-            properties =property.query.all()
+            properties =Property.query.all()
             flash('Success')    
             return redirect(url_for('/properties',properties=properties))
         else:
@@ -59,7 +59,7 @@ def addproperty():
 
 @app.route('/properties',methods=['POST', 'GET'])
 def properties():
-    properties = property.query.all()
+    properties = Property.query.all()
     return render_template('properties.html', properties = properties)
 
 
