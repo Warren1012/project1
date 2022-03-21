@@ -9,7 +9,7 @@ class Propertyform(FlaskForm):
     bathroom = IntegerField('bathroom', validators=[DataRequired()])
     location = StringField('location', validators=[DataRequired()])
     price = DecimalField('price', validators=[DataRequired()])
-    type=SelectField('Type',choice=[('House'),('Apartment')],validators=[DataRequired()])
+    type=SelectField('Type',choices=[('House','House'),('Apartment','Apartment')],validators=[DataRequired()])
     description=TextAreaField('description',validators=[DataRequired()])
     image = FileField('image', validators=[FileRequired(),FileAllowed(['jpg', 'png'], 'Images only!')])
     
