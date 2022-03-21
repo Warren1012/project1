@@ -55,7 +55,7 @@ def addproperty():
             return redirect(url_for('/properties',properties=properties))
         else:
             flash('Error.Try again','Failed')
-            return render_template('form.html',form=form)
+    return render_template('form.html',form=form)
 
 @app.route('/properties',methods=['POST', 'GET'])
 def properties():
