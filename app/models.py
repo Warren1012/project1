@@ -17,7 +17,7 @@ class Property(db.Model):
     propertyT=db.Column(db.String(80))
     photo=db.Column(db.String(length=2048))
     
-    def __init__(self,title,rooms, bathroom,location,price,type,description,image):
+    def __init__(self,title,rooms, bathroom,location,price,type,description,photo):
         self.title = title
         self.rooms = rooms
         self.bathroom = bathroom
@@ -25,7 +25,7 @@ class Property(db.Model):
         self.price = price
         self.type = type
         self.description = description
-        self.image = image
+        self.photo = photo
 
     def is_authenticated(self):
         return True

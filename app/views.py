@@ -6,7 +6,7 @@ This file creates your application.
 """
 
 from app import app,db
-from flask import flash, render_template, request, redirect, url_for
+from flask import flash, render_template, request, redirect, send_from_directory, url_for
 from app.forms import Propertyform
 from app.models import Property
 from werkzeug.utils import secure_filename
@@ -20,7 +20,6 @@ import os
 def home():
     """Render website's home page."""
     return render_template('home.html')
-
 
 @app.route('/about/')
 def about():
@@ -50,29 +49,40 @@ def addproperty():
            
            properties =Property.query.all()
            flash('Success')
-           return redirect(url_for('/properties',properties=properties))
+           return redirect(url_for('properties',properties=properties))
        else:
            flash('Error.Try again','Failed')
    return render_template('form.html',form=form)
+
+def get_uploaded_images():
+    images=[]
+    rootdir = os.getcwd()
+    for subdir, dirs, files in os.walk(rootdir + '\\uploads\\'):  
+        for file in files:
+            if ".jpg" in file or ".png" in file:
+                images.append(file)
+    return images
 
 @app.route('/properties',methods=['POST', 'GET'])
 def properties():
     properties = Property.query.all()
     return render_template('properties.html', properties = properties)
 
-
 @app.route('/property/<propertyid>')
 def propertyid(propertyid):
     propertyid = property.query.get(propertyid)
     return render_template('propertyid.html', propertyid = propertyid)
 
-def get_uploaded_images():
-    rootdir = os.getcwd()
-    list = []
-    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads/'):
-        for file in files:
-            list.append(file)
-        return list
+@app.route("/uploads/<filename>")
+def get_image(filename):
+    root_dir = os.getcwd()
+    return send_from_directory(os.path.join(root_dir,app.config['UPLOAD_FOLDER']), filename)
+
+@app.route("/files", methods=['POST','GET'])
+def files():
+    img=get_uploaded_images()
+    if request.method =='GET':
+        return render_template('properties.html', img= img)
 ###
 # The functions below should be applicable to all Flask apps.
 ###
