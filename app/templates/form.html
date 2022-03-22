@@ -7,7 +7,7 @@
 <form id="property" name="" method="POST" enctype="multipart/form-data">
     {{ form.csrf_token }}
     <div class="form-group">
-      {{ form.username.label }}
+      {{ form.title.label }}
       {{ form.title(class='form-control') }}
     </div>
 
@@ -30,6 +30,11 @@
         {{ form.price.label }}
         {{ form.price(class='form-control') }}
       </div>
+      
+      <div class="form-group">
+        {{ form.type.label }}
+        {{ form.type(class='form-control') }}
+      </div>
 
       <div class="form-group">
         {{ form.description.label }}
@@ -38,7 +43,7 @@
 
       <div class="form-group">
         {{ form.image.label }}
-        {{ form.image}}
+        {{ form.image(class="form-control")}}
       </div>
     <button type="submit" name="submit" class="btn">Add Property</button>
   </form>

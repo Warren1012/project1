@@ -34,7 +34,7 @@ def addproperty():
        if form.validate_on_submit(): 
            photo=form.image.data
            filename=secure_filename(photo.filename)
-           photo.save(os.path.join(app.confi['UPLOAD_FOLDER'], filename))
+           photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
            
            title = form.title.data
            rooms= form.rooms.data
@@ -53,7 +53,7 @@ def addproperty():
            return redirect(url_for('/properties',properties=properties))
        else:
            flash('Error.Try again','Failed')
-       return render_template('form.html',form=form)
+   return render_template('form.html',form=form)
 
 @app.route('/properties',methods=['POST', 'GET'])
 def properties():
